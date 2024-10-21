@@ -104,10 +104,14 @@ function makeCardByTemplate(title, description, tags, price, img) {
     return myCard;
 }
 const container = document.querySelector('#shop-items')
-items.forEach((item) => {
-    const cardItem = makeCardByTemplate(item.title, item.description, item.tags, item.price, item.img);
-    container.append(cardItem);
-})
+
+function renderItems(arr) {
+    arr.forEach((item) => {
+        const cardItem = makeCardByTemplate(item.title, item.description, item.tags, item.price, item.img);
+        container.append(cardItem);
+    })
+}
+renderItems(items);
 
 const searchInput = document.querySelector('#search-input');
 const searchButton = document.querySelector('#search-btn');
@@ -126,10 +130,7 @@ searchButton.addEventListener('click', function() {
     container.innerHTML = '';
 
     if (arrIncludes.length > 0) {
-        arrIncludes.forEach((item) => {
-            const cardItem = makeCardByTemplate(item.title, item.description, item.tags, item.price, item.img);
-            container.append(cardItem);
-        })
+        renderItems(arrIncludes);
     } else {
         nothingFound.textContent = "Ничего не найдено";
     }
